@@ -23,8 +23,7 @@ The objective of this opcode is to eliminate many hard design decisions and erro
 
 ## Specification
 
-
-### stack
+The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in RFC 2119.
 
 | Constant         | Value                  |
 |:-----------------|:-----------------------|
@@ -32,11 +31,13 @@ The objective of this opcode is to eliminate many hard design decisions and erro
 | `DECIMALS`       | `18`                   |
 | `UNIT`           | `1000000000000000000`  |
 
-Starting from `BLOCK_NUM >= FORK_BLOCK_NUM` a new istruction is incruded:
+Starting from `BLOCK_NUM >= FORK_BLOCK_NUM` a new istruction is included:
 
 `FIXEXP` : `0x0C`
 
-The `FIXEXP` instruction (fixed point exponentiation) pops 2 values from the stack, first `base` and then `exponent`, and pushes on the stack `res`. `base`, `exponent` and `aux` are interpreted as fixed point numbers with 18 decimal places.
+### stack
+
+This instruction pops 2 values from the stack, first `base` and then `exponent`, and pushes onto the stack `res`. `base`, `exponent` are interpreted as fixed point numbers with 18 decimal places.
 
 ```
 if(base != 0)
@@ -79,7 +80,8 @@ This EIP introduces a new OPCODe therefore needs to be included in a hard fork.
 
 ## Test Cases
 
-1. ```
+1. `2^2`
+   ```
    PUSH8 0x1BC16D674EC80000
    PUSH8 0x1BC16D674EC80000
    FIXEXP
@@ -100,13 +102,7 @@ This EIP introduces a new OPCODe therefore needs to be included in a hard fork.
 
 ## Security Considerations
 
-<!--
-  All EIPs must contain a section that discusses the security implications/considerations relevant to the proposed change. Include information that might be important for security discussions, surfaces risks and can be used throughout the life cycle of the proposal. For example, include security-relevant design decisions, concerns, important discussions, implementation-specific guidance and pitfalls, an outline of threats and risks and how they are being addressed. EIP submissions missing the "Security Considerations" section will be rejected. An EIP cannot proceed to status "Final" without a Security Considerations discussion deemed sufficient by the reviewers.
-
-  The current placeholder is acceptable for a draft.
-
-  TODO: Remove this comment before submitting
--->
+There are a lot of corner cases and possible rounding mistakes that can happen in this computing so all implementations must be thoroughly tested
 
 Needs discussion.
 
